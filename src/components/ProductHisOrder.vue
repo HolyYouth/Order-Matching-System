@@ -1,26 +1,25 @@
 <template>
 <div>
   
-  <div class="table_container">
+  <div  class="table_container">
     <el-table
-      :data="orders"
+      :data="product.allOrder"
       stripe
-      height="800px"
       style="width: 100%"
-      highlight-current-row=true
-      header-row-class-name="tableHead">
+      highlight-current-row
+      :default-sort = "{prop: 'createTime', order: 'descending'}">
       <el-table-column
-        prop="id"
-        label="id"
+        prop="createTime"
+        label="created"
         align="center">
       </el-table-column>
       <el-table-column
-        prop="type"
-        label="type"
+        prop="role"
+        label="role"
         align="center">
       </el-table-column>
       <el-table-column
-        prop="amount"
+        prop="remainAmount"
         label="amount"
         align="center">
       </el-table-column>
@@ -40,11 +39,44 @@
 </template>
 <script>
 export default {
-    props: {
-    orders: {
-      type: String,
-      default: 'hello world'
+    props:['product'],
+ 
+  mounted(){
+    this.product.allOrder.forEach((val,index)=>{
+      val['createTime'] = this.renderTime(val['createTime'])
+    })
+    
+    // for(var i=0;i<this.product.length;i++){
+    //   this.product.allOrder[i].createTime=this.renderTime(this.product.allOrder[i].createTime)
+    // }
+    this.$forceUpdate();
+  },
+  data(){
+    return {
+      
     }
+  },
+  watch:{
+    // "this.$route":function(){
+    //   console.log("change")
+    //   this.reFresh= false;
+    //   this.$nextTick(()=>{
+    //     this.reFresh = true
+    //   })
+    // }
+  },
+  beforeRouteUpdate (to,from,next){
+      this.$forceUpdate();
+  },
+  methods:{
+      renderTime(date) {
+        var dateee = date.toString();
+        return dateee.substr(0,10)+" "+dateee.substr(11,8)
+//         this.userOrder.forEach((val,index) => {
+// var creattime=val["createTime"].toString()
+// val["createTime"]=creattime.substr(0,10)+" "+creattime.substr(11,8)
+// });
+      }
   }
 }
 </script>
@@ -85,9 +117,7 @@ export default {
   }
   .el-row {
     margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
+    
   }
   .el-col {
     border-radius: 4px;
@@ -118,4 +148,5 @@ export default {
     table-layout:initial;
     height: 1px;
   }
+  
 </style>

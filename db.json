@@ -1,0 +1,81 @@
+{
+    "getStocksList":[{
+    "id":"1",
+    "stock": "APPL1",
+    "price": 10.0
+    }, {
+    "id":"2",
+    "stock": "IBM",
+    "price": 11.0
+    }, {
+    "id":"3",
+    "stock": "CITI",
+    "price": 10.1
+    },{
+    "id":"4",
+    "stock": "APPL",
+    "price": 10.0
+    }, {
+    "id":"5",
+    "stock": "IBM",
+    "price": 11.0
+    }, {
+    "id":"6",
+    "stock": "CITI",
+    "price": 10.1
+    },{
+    "id":"7",
+    "stock": "APPL",
+    "price": 10.0
+    }, {
+    "id":"8",
+    "stock": "IBM",
+    "price": 11.0
+    }, {
+    "id":"9",
+    "stock": "CITI",
+    "price": 10.1
+    },{
+    "id":"10",
+    "stock": "APPL",
+    "price": 10.0
+    }, {
+    "id":"11",
+    "stock": "IBM",
+    "price": 11.0
+    }, {
+    "id":"12",
+    "stock": "CITI",
+    "price": 10.1
+    },{
+    "id":"13",
+    "stock": "APPL",
+    "price": 10.0
+    }],
+    "APPL1":[{
+    "buy_price":10,
+    "buy_qut":10,
+    "sale_price":11,
+    "sale_qut":12
+    },{
+    "buy_price":10,
+    "buy_qut":10,
+    "sale_price":11,
+    "sale_qut":12
+    },{
+    "buy_price":10,
+    "buy_qut":10,
+    "sale_price":11,
+    "sale_qut":12
+    },{
+    "buy_price":10,
+    "buy_qut":10,
+    "sale_price":11,
+    "sale_qut":12
+    },{
+    "buy_price":10,
+    "buy_qut":10,
+    "sale_price":11,
+    "sale_qut":12
+    }]
+    }

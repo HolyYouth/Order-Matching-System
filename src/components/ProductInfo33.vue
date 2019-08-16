@@ -6,34 +6,9 @@
       <el-tooltip class="item" effect="dark" content="Click to creat an order" placement="top-start">
         <el-button type="text" style="float:right;padding-right:10px;color:#333;" icon="el-icon-circle-plus" @click="checkLogin">Create Order</el-button>
       </el-tooltip>
-      <el-dialog title="Create Order" width="40%" :visible.sync="dialogFormVisible">
-        <el-form :model="newOrder" :rules="rules" ref="newOrder">
-          <el-form-item label="type:" prop="orderType">
-            <el-select style="float:left;width:100%"  v-model="newOrder.orderType" placeholder="Please choose the order type">
-              <el-option :disabled="mktDisable" label="MKT" value="MKT"></el-option>
-              <el-option label="LMT" value="LMT"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="Side:" prop="role">
-            <el-select style="float:left;width:100%"  v-model="newOrder.role" placeholder="Please choose your role">
-              <el-option label="Bid" value="Bid"></el-option>
-              <el-option label="Ask" value="Ask"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="Quantity:" prop="originAmount">
-            <el-input v-model.number="newOrder.originAmount" autocomplete="off" clearable placeholder="Please input the amount"></el-input>
-          </el-form-item>
-          <el-form-item label="Price:" prop="price">
-            <el-input v-if="newOrder.orderType!='MKT'" v-model.number="newOrder.price" autocomplete="off" placeholder="Please input the price"></el-input>
-            <span v-if="newOrder.orderType=='MKT'&&newOrder.role=='Ask'" style="float:left"><span style="float:left">{{newOrder.price=product.matchOrders[0].bidPrice}}$</span> <br/>(The price might be different since the market float)</span>
-            <span v-if="newOrder.orderType=='MKT'&&newOrder.role=='Bid'" style="float:left"><span style="float:left">{{newOrder.price=product.matchOrders[0].askPrice}}$</span> <br/>(The price might be different since the market float)</span>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="reset('newOrder')">Cancel</el-button>
-          <el-button type="primary" @click="createOrder('newOrder')">Create</el-button>
-        </div>
-      </el-dialog>
+      <!-- <el-dialog title="Create Order" width="40%" :visible.sync="dialogFormVisible"> -->
+        
+      <!-- </el-dialog> -->
     </h2>
 <el-row style="padding-left:10px;margin-bottom: 0px;" :gutter="20">
     <el-col :span="6"><div style="float:left" class="grid-content bg-purple">Symbol: {{product.symbol}}</div></el-col>
@@ -43,6 +18,47 @@
     <el-col :span="6"><div style="float:left" class="grid-content bg-purple">Price: {{product.price}}</div></el-col>
     <el-col :span="6"><div style="float:left" class="grid-content bg-purple">Status: {{product.status}}</div></el-col>
     </el-row>
+    
+    <el-form :model="newOrder" :rules="rules" ref="newOrder">
+      <el-row>
+      <el-col>
+          <el-form-item label="type:" prop="orderType">
+            <el-select v-model="value" placeholder="Type">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :default-value="MKT"
+                :value="item.value">
+              </el-option>
+            </el-select>
+            <el-select style="float:left;width:20%"  v-model="newOrder.orderType" placeholder="Please choose the order type">
+              <el-option :disabled="mktDisable" label="MKT" value="MKT"></el-option>
+              <el-option label="LMT" value="LMT"></el-option>
+            </el-select>
+          </el-form-item>
+      </el-col>
+      <el-col>
+          <el-form-item label="role:" prop="role">
+            <el-select style="float:left;width:20%"  v-model="newOrder.role" placeholder="Please choose your role">
+              <el-option label="Bid" value="Bid"></el-option>
+              <el-option label="Ask" value="Ask"></el-option>
+            </el-select>
+          </el-form-item>
+      </el-col>
+      </el-row>
+          <el-form-item label="Amount:" prop="originAmount">
+            <el-input v-model.number="newOrder.originAmount" autocomplete="off" clearable placeholder="Please input the amount"></el-input>
+          </el-form-item>
+          <el-form-item label="Price:" prop="price">
+            <el-input v-if="newOrder.orderType!='MKT'" v-model.number="newOrder.price" autocomplete="off" placeholder="Please input the price"></el-input>
+            <span v-if="newOrder.orderType=='MKT'" style="float:left"><span style="float:left">{{newOrder.price=product.price}}$</span> <br/>(The price might be different since the market float)</span>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="reset('newOrder')">Cancel</el-button>
+          <el-button type="primary" @click="createOrder('newOrder')">Create</el-button>
+        </div>
 </div>
 </template>
 <script>
@@ -54,6 +70,14 @@ export default {
   //   },
   data(){
     return {
+      options:[{
+        value:'MKT',
+        label:'MKT',
+      },{
+        value:'LMT',
+        label:'LMT'
+      }
+      ],
       dialogFormVisible:false,
       mktDisable:false,
       newOrder:{

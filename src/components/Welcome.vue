@@ -2,7 +2,7 @@
 <div class="Welcome" style="margin:auto;position:relative;top:15%;width:30%;">
 <el-container>
 <el-header style="border-top-left-radius: 4px;border-top-right-radius: 4px;">
-    <el-menu :default-active="$route.path"  style="width:100%" router mode="horizontal" @select="handleSelect">
+    <el-menu :default-active="$route.path"  style="width:100%" router mode="horizontal" >
         <el-menu-item style="width:50%;" index="/signin">Sign In</el-menu-item>
         <el-menu-item style="width:50%;" index="/signup">Sign Up</el-menu-item>
     </el-menu>
@@ -44,9 +44,7 @@
 .Welcome{
   background-image:url('../static/5a31d86422d8a.jpg');
 }
-h1, h2 {
-  font-weight: normal;
-}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -61,9 +59,9 @@ a {
 
   .el-row {
     margin-bottom: 20px;
-    &:last-child {
+    /* &:last-child {
       margin-bottom: 0;
-    }
+    } */
   }
   .el-col {
     border-radius: 4px;
